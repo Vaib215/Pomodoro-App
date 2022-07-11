@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <title>Pomodoro App</title>
+</head>
+
+<body>
+    <div class="container">
+        <h2>pomodoro</h2>
+        <div class="time-options">
+            <div class="time-option active" data-time="25" id="pomodoro">pomodoro</div>
+            <div class="time-option" data-time="5" id="short">short break</div>
+            <div class="time-option" data-time="15" id="long">Long Break</div>
+        </div>
+        <div class="timer-wrapper">
+            <div class="timer-wrapper-middle">
+
+                <div class="timer-wrapper-inner">
+                    <h1 id="time">
+                        <span id="min">25</span>
+                        <span>:</span>
+                        <span id="sec">00</span>
+                    </h1>
+                    <small>Start</small>
+                </div>
+            </div>
+        </div>
+        <div class="settings-icon">
+            <img src="./images/settings.svg" alt="settings">
+        </div>
+        <dialog>
+            <div class="settings-wrapper">
+                <div class="top">
+                    <h3>Settings</h3>
+                    <button class="settings-cross">x</button>
+                </div>
+                <hr id="shr">
+                <div class="bottom">
+                    <div class="time-settings">
+                        <p>Time (Minutes)</p>
+                        <div class="settings">
+                            <div class="setting">
+                                <label for="pomodoro-length">Pomodoro</label>
+                                <input type="number" id="pomodoro-length" value="25">
+                            </div>
+                            <div class="setting">
+                                <label for="short-break-length">Short Break</label>
+                                <input type="number" id="short-break-length" value="5">
+                            </div>
+                            <div class="setting">
+                                <label for="long-break-length">Long Break</label>
+                                <input type="number" id="long-break-length" value="15">
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="font-settings">
+                        <p>Font</p>
+                        <div class="font-options">
+                            <div class="font-option active font-1" data-font="var(--font-1)">Aa</div>
+                            <div class="font-option font-2" data-font="var(--font-2)">Aa</div>
+                            <div class="font-option font-3" data-font="var(--font-3)">Aa</div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="color-settings">
+                        <p>color</p>
+                        <div class="color-options">
+                            <div class="color-option active color-1" data-color="var(--accent-1)"></div>
+                            <div class="color-option color-2" data-color="var(--accent-2)"></div>
+                            <div class="color-option color-3" data-color="var(--accent-3)"></div>
+                        </div>
+                    </div>
+                </div>
+                <button>Apply</button>
+            </div>
+
+        </dialog>
+    </div>
+</body>
+
+</html>
