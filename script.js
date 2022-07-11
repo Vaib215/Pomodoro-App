@@ -1,3 +1,4 @@
+const body = document.querySelector('body');
 const setting = document.querySelector('.settings-icon');
 const dialog = document.querySelector('dialog');
 const cross = document.querySelector('.settings-cross');
@@ -13,11 +14,28 @@ let isSettingOpen = false;
 let paused = true;
 let time;
 
+const checkTimeEnd = (minVal, secVal) => {
+    if (minVal == 0 && secVal === 0) {
+        timer.classList.add('end');
+        paused = true;
+        setProgress(100);
+        body.classList.add('end');
+        document.querySelector('.timer-wrapper-inner small').innerHTML = "Start";
+        setTimeout(() => {
+            timer.classList.remove('end');
+            body.classList.remove('end');
+            resetTime();
+        }, 5000);
+        document.querySelector(".timer-wrapper-middle:after").style.setProperty("color", "red");
+    }
+}
+
 const resetTime = () => {
     min.innerHTML = document.querySelector('.time-option.active').getAttribute('data-time').padStart(2,'0');
     paused = true
     document.querySelector('.timer-wrapper-inner small').innerHTML = "Start";
     sec.innerHTML = "00";
+    clearInterval(time);
     setProgress(100);
 }
 
@@ -43,6 +61,7 @@ const startTimer = () => {
         let currentTime = (minVal * 60) + secVal;
         let per = (currentTime / totalTimeInSec) * 100;
         setProgress(per);
+        checkTimeEnd(minVal, secVal);
     }, 1000);
 }
 
@@ -65,10 +84,18 @@ const applySettings = () => {
     document.querySelector(":root").style.setProperty("--accent-default", color);
     document.querySelector(":root").style.setProperty("--font-default", font);
     let pomoDoroLength = document.querySelector("#pomodoro-length").value;
-    document.querySelector("#pomodoro").setAttribute("data-time", ""+pomoDoroLength);
     let shortBreakLength = document.querySelector("#short-break-length").value;
-    document.querySelector("#short").setAttribute("data-time", ""+shortBreakLength);
     let longBreakLength = document.querySelector("#long-break-length").value;
+    if (pomoDoroLength <= 0 || shortBreakLength <= 0 || longBreakLength <= 0) {
+        alert("Please enter valid time");
+        return;
+    }
+    if (pomoDoroLength>59 || shortBreakLength>59 || longBreakLength>59) {
+        alert("Please enter time less than 60");
+        return;
+    }
+    document.querySelector("#pomodoro").setAttribute("data-time", ""+pomoDoroLength);
+    document.querySelector("#short").setAttribute("data-time", ""+shortBreakLength);
     document.querySelector("#long").setAttribute("data-time", ""+longBreakLength);
     resetTime()
     dialog.close();
