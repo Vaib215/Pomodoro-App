@@ -348,7 +348,7 @@ dialog{
     margin-inline: auto;
 }
 
-.settings-wrapper button:hover {
+.settings-wrapper > div > button:hover {
     transform: translateY(120%) scale(1.05);
 }
 
