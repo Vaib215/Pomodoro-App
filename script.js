@@ -31,7 +31,7 @@ const checkTimeEnd = (minVal, secVal) => {
 }
 
 const resetTime = () => {
-    min.innerHTML = document.querySelector('.time-option.active').getAttribute('data-time').padStart(2,'0');
+    min.innerHTML = document.querySelector('.time-option.active').getAttribute('data-time').padStart(2, '0');
     paused = true
     document.querySelector('.timer-wrapper-inner small').innerHTML = "Start";
     sec.innerHTML = "00";
@@ -40,7 +40,7 @@ const resetTime = () => {
 }
 
 const setProgress = per => {
-    document.querySelector(".timer-wrapper-middle").style.setProperty("--progress", per+"%");
+    document.querySelector(".timer-wrapper-middle").style.setProperty("--progress", per + "%");
 }
 
 const startTimer = () => {
@@ -54,8 +54,8 @@ const startTimer = () => {
         } else {
             secVal--;
         }
-        min.innerHTML = String(minVal).padStart(2,'0');
-        sec.innerHTML = String(secVal).padStart(2,'0');
+        min.innerHTML = String(minVal).padStart(2, '0');
+        sec.innerHTML = String(secVal).padStart(2, '0');
         let totalTimeInMin = document.querySelector(".time-option.active").getAttribute("data-time");
         let totalTimeInSec = totalTimeInMin * 60;
         let currentTime = (minVal * 60) + secVal;
@@ -90,13 +90,17 @@ const applySettings = () => {
         alert("Please enter valid time");
         return;
     }
-    if (pomoDoroLength>59 || shortBreakLength>59 || longBreakLength>59) {
+    if (pomoDoroLength > 59 || shortBreakLength > 59 || longBreakLength > 59) {
         alert("Please enter time less than 60");
         return;
     }
-    document.querySelector("#pomodoro").setAttribute("data-time", ""+pomoDoroLength);
-    document.querySelector("#short").setAttribute("data-time", ""+shortBreakLength);
-    document.querySelector("#long").setAttribute("data-time", ""+longBreakLength);
+    if (Math.trunc(pomoDoroLength) != pomoDoroLength || Math.trunc(shortBreakLength) != shortBreakLength || Math.trunc(longBreakLength) != longBreakLength) {
+        alert("Please enter an integer value");
+        return;
+    }
+    document.querySelector("#pomodoro").setAttribute("data-time", "" + pomoDoroLength);
+    document.querySelector("#short").setAttribute("data-time", "" + shortBreakLength);
+    document.querySelector("#long").setAttribute("data-time", "" + longBreakLength);
     resetTime()
     dialog.close();
 }
@@ -121,7 +125,7 @@ const toggleFont = e => {
 }
 
 const toggleTimeMode = e => {
-    if(!e.target.classList.contains('time-option')) return
+    if (!e.target.classList.contains('time-option')) return
     let timeOption = document.querySelectorAll('.time-option');
     timeOption.forEach(option => {
         option.classList.remove('active');
